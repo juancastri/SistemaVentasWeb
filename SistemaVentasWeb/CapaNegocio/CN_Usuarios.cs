@@ -17,5 +17,77 @@ namespace CapaNegocio
         {
             return objCapaDato.Listar();
         }
+
+
+        public int Registrar(Usuario obj, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+            
+            //Validar que el nombre,apellido y correo del usuario no sean Null o esten vacios
+            if (string.IsNullOrEmpty(obj.Nombres) || string.IsNullOrWhiteSpace(obj.Nombres)) 
+            {
+                Mensaje = "El Nombre del usuario no puede ser vacio";            
+            }
+            else if (string.IsNullOrEmpty(obj.Apellidos) || string.IsNullOrWhiteSpace(obj.Apellidos))
+            {
+                Mensaje = "El Apellido del usuario no puede ser vacio";
+            }
+            else if (string.IsNullOrEmpty(obj.Correo) || string.IsNullOrWhiteSpace(obj.Correo))
+            {
+                Mensaje = "El Correo del usuario no puede ser vacio";
+            }
+
+
+            //Si el mensaje sigue siendo vacio quiere decir que no hubo ningun error
+            if (string.IsNullOrEmpty(Mensaje))
+            {
+                //Enviarle un correo
+                string clave = "test123";
+                obj.Clave = CN_Recursos.ConvertirSha256(clave);
+
+                return objCapaDato.Registrar(obj, out Mensaje);
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+
+
+        public bool Editar(Usuario obj, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+
+            //Validar que el nombre,apellido y correo del usuario no sean Null o esten vacios
+            if (string.IsNullOrEmpty(obj.Nombres) || string.IsNullOrWhiteSpace(obj.Nombres))
+            {
+                Mensaje = "El Nombre del usuario no puede ser vacio";
+            }
+            else if (string.IsNullOrEmpty(obj.Apellidos) || string.IsNullOrWhiteSpace(obj.Apellidos))
+            {
+                Mensaje = "El Apellido del usuario no puede ser vacio";
+            }
+            else if (string.IsNullOrEmpty(obj.Correo) || string.IsNullOrWhiteSpace(obj.Correo))
+            {
+                Mensaje = "El Correo del usuario no puede ser vacio";
+            }
+
+
+            if (string.IsNullOrEmpty(Mensaje))
+            {
+                return objCapaDato.Editar(obj, out Mensaje);
+            }
+            else 
+            {
+                return false; 
+            }
+        }
+
+        public bool Eliminar(int id, out string Mensaje)
+        {
+            return objCapaDato.Eliminar(id, out Mensaje);
+        }
+
     }
 }

@@ -4,6 +4,9 @@ Select * from USUARIO
 
 INSERT INTO USUARIO(Nombres,Apellidos,Correo,Clave) values ('test nombre', 'test apellido','test@example.com','ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae')
 
+INSERT INTO USUARIO(Nombres,Apellidos,Correo,Clave) values ('test 02', 'user 02','user02@example.com','76431fac8a187241af8f3f37156deb94732f52fb45eb07ec4f462051bd82f183')
+
+Update USUARIO set Activo = 0 where IdUsuario = 2
 
 Select * from CATEGORIA
 
